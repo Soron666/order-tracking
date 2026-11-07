@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Callable
 
 from ..order import Order
-from ..status import OrderStatus
 from ..watcher import Watcher
 
 Printer = Callable[[str], None]

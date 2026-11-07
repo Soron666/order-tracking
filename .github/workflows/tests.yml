@@ -7,10 +7,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ubuntu-24.04 is pinned because ubuntu-latest is now Ubuntu 26.04,
+    # which no longer ships a Python 3.9 build.
+    runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
 
     steps:
       - uses: actions/checkout@v4
@@ -31,5 +34,5 @@ jobs:
       - name: Check the required output
         run: |
           python main.py > actual.txt
-          diff -u expected_output.txt actual.txt
+          diff -u <(tr -d '\r' < expected_output.txt) <(tr -d '\r' < actual.txt)
           echo "Required output matches."
