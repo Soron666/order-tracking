@@ -180,6 +180,7 @@ final "your order is now Delivered" message.
 order-tracking/
 ├── main.py                        # entry point - prints the required output
 ├── expected_output.txt            # the exact output the assignment asks for
+├── verify_against_pdf.py          # diffs the demo output against the assignment PDF
 ├── pyproject.toml
 ├── requirements.txt
 ├── order_tracking/
@@ -221,8 +222,37 @@ The suite covers:
 * the demo output matches the required output **character for character**
 * the kitchen is not notified when the order is delivered
 
-CI runs the suite on Python 3.9, 3.10, 3.11, 3.12 and 3.13, and also diffs
+CI runs the suite on Python 3.9, 3.10, 3.11, 3.12, 3.13 and 3.14, and also diffs
 the demo output against `expected_output.txt`.
+
+---
+
+## Checking against the assignment PDF
+
+`verify_against_pdf.py` extracts the **Required Output** block straight out of
+the assignment PDF, runs the demo, and compares the two — plus it re-checks
+each numbered rule against the code.
+
+```bash
+pip install -r requirements.txt
+python verify_against_pdf.py                          # auto-detects the PDF
+python verify_against_pdf.py path/to/assignment.pdf   # or point at it
+```
+
+```
+RESULT: EXACT MATCH (line for line, character for character)
+[Rule 1] Order class holds the status ............... PASS
+[Rule 2] Order names no phone/kitchen ............... PASS
+[Rule 3] Watcher added/removed any time ............. PASS
+[Rule 4] One change -> every watcher once ........... PASS
+[Note]  Kitchen not notified on Delivered .......... PASS
+[Note]  Kitchen removed itself from list ........... PASS
+[Note]  SMS still notified on Delivered ........... PASS
+OVERALL: ALL CHECKS PASSED
+```
+
+If the PDF is not on the machine, the script still runs the rule checks and
+tells you how to point it at the file.
 
 ---
 

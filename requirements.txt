@@ -1,1 +1,2 @@
 pytest>=7.0
+pypdf>=4.0
