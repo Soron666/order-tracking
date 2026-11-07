@@ -1,0 +1,8 @@
+Order is now: Cooking
+SMS to Rahim: your order is now Cooking
+Kitchen screen: Cooking
+Order is now: Out for delivery
+SMS to Rahim: your order is now Out for delivery
+Kitchen screen: Out for delivery
+Order is now: Delivered
+SMS to Rahim: your order is now Delivered
